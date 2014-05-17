@@ -1,5 +1,6 @@
 package com.example.wechat;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * This is a simple Android mobile client
@@ -27,23 +29,27 @@ public class ClientActivity extends Activity {
 	private EditText textField;
 	private Button button;
 	private String messsage;
-
-	@Override
+    StringBuffer br=new StringBuffer();
+	TextView textFieldScreen;
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_slimple_text_client);
 
 		textField = (EditText) findViewById(R.id.editText1); // reference to the text field
 		button = (Button) findViewById(R.id.button1); // reference to the send button
-
+		textFieldScreen = (TextView) findViewById(R.id.textView1); 
 		// Button press event listener
 		button.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
+				textFieldScreen.setText("");
 				messsage = textField.getText().toString(); // get the text message on the text field
+				br.append("\n"+messsage);
 				textField.setText(""); // Reset the text field to blank
 				SendMessage sendMessageTask = new SendMessage();
 				sendMessageTask.execute();
+				textFieldScreen.setText(br.toString());
 			}
 		});
 	}
