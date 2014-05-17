@@ -54,7 +54,7 @@ public class ClientActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 			try {
 
-				client = new Socket("192.168.2.89", 4456); // connect to the server
+				client = new Socket("192.168.0.4",5577); // connect to the server
 				printwriter = new PrintWriter(client.getOutputStream(), true);
 				printwriter.write(messsage); // write the message to output stream
 
